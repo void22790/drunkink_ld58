@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=4 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
+[ext_resource type="Script" uid="uid://crxbind0p66w1" path="res://scripts/root/drawing_canvas.gd" id="2_cgoxl"]
+[ext_resource type="TileSet" uid="uid://cyoh6otgt64or" path="res://graphics/func/tilesets/drawing_tileset.tres" id="3_qo04j"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jc805")
+
+[node name="Drawing Canvas" type="Node2D" parent="."]
+script = ExtResource("2_cgoxl")
+
+[node name="Drawing Layer" type="TileMapLayer" parent="Drawing Canvas"]
+tile_set = ExtResource("3_qo04j")
+
+[node name="Cursor Layer" type="TileMapLayer" parent="Drawing Canvas"]
+tile_set = ExtResource("3_qo04j")
+collision_enabled = false
