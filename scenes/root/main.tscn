@@ -10,6 +10,9 @@ script = ExtResource("1_jc805")
 [node name="Drawing Canvas" type="Node2D" parent="."]
 script = ExtResource("2_cgoxl")
 
+[node name="Stencil Layer" type="TileMapLayer" parent="Drawing Canvas"]
+tile_set = ExtResource("3_qo04j")
+
 [node name="Drawing Layer" type="TileMapLayer" parent="Drawing Canvas"]
 tile_set = ExtResource("3_qo04j")
 
