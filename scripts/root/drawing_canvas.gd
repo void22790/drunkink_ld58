@@ -12,6 +12,11 @@ var tt_path = "res://graphics/tattoo/tt_test.png"
 var stencil_data: Array[Color]
 var stencil_ink
 
+var cursor_raw_pos: Vector2
+var cursor_pos: Vector2i
+var base_pos: Vector2 = Vector2(160.0, 90.0)
+var cursor_reversed = true
+
 var last_cursor_position : Vector2i
 
 func _ready() -> void:
@@ -24,15 +29,15 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var mouse_position = get_viewport().get_mouse_position()
-	var cursor_position = drawing_layer.local_to_map(mouse_position)
 	#print("mouse position: ", mouse_position)
 	#print("cursor position: ", cursor_position)
 	
-	_draw_cursor(cursor_position)
+	cursor_pos = _update_cursor(mouse_position)
+	_draw_cursor(cursor_pos)
 	
 	if Input.is_action_pressed("select"):
-		if canvas_rect.has_point(cursor_position):
-			drawing_layer.set_cell(mouse_position, 0, Vector2i(1,0))
+		if canvas_rect.has_point(cursor_pos):
+			drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
 
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
@@ -57,6 +62,14 @@ func _draw_stencil() -> void:
 			elif stencil_data[count] == Color.WHITE:
 				stencil_layer.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 			count += 1
+
+func _update_cursor(pos: Vector2) -> Vector2i:
+	var offset = pos - base_pos
+	if cursor_reversed:
+		offset *= -1
+	cursor_raw_pos = lerp(cursor_raw_pos, base_pos + offset, 0.1)
+	var cursor_position = drawing_layer.local_to_map(cursor_raw_pos)
+	return cursor_position
 
 func _draw_cursor(pos: Vector2i) -> void:
 	cursor_layer.set_cell(pos, 0, Vector2i(1,0))
