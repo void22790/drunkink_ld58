@@ -12,4 +12,3 @@ void vertex() {
 	vec2 jitter = vec2(rand(UV + snap), rand(UV + snap + 1.0));
 	VERTEX.xy += (jitter - 0.5) * intensity;
 }
-

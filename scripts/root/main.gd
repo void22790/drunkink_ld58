@@ -4,15 +4,17 @@ class_name Main
 
 @onready var drawing_canvas: Node2D = $"Drawing Canvas"
 @onready var drawing_hand: Node2D = $"Drawing Hand"
-@onready var mouse_cursor: Node2D = $"Mouse Cursor"
+@onready var mouse_cursor: Node2D = $"Interface/Mouse Cursor"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i
 var stencil_ink: int
 
+enum GameDifficulty {EASY = 2, MEDIUM = 1, HARD = 0}
 enum GameState {IDLE, DRAWING}
 
 static var game_state = GameState.IDLE
+static var difficulty = GameDifficulty.EASY
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

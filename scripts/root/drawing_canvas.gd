@@ -12,7 +12,9 @@ var canvas_rect: Rect2i
 
 var tt_path = "res://graphics/tattoo/tt_test.png"
 var stencil_data: Array[Color]
-var stencil_ink
+var stencil_ink: int
+
+var ink_amount: int = 10
 
 var cursor_raw_pos: Vector2
 var cursor_pos: Vector2i
@@ -42,10 +44,10 @@ func _process(delta: float) -> void:
 	
 	if Main.game_state == Main.GameState.DRAWING:
 		#_draw_cursor(cursor_pos)
-		
 		if Input.is_action_pressed("select"):
-			if canvas_rect.has_point(cursor_pos):
+			if canvas_rect.has_point(cursor_pos) and ink_amount > 0:
 				drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
+				ink_amount -= 1
 
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
@@ -58,6 +60,7 @@ func _get_stencil_data() -> void:
 			if color == Color.BLACK:
 				ink += 1
 	stencil_ink = ink
+	ink_amount = (10 * ink) + (ink * 10 * Main.difficulty)
 
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():
