@@ -4,6 +4,8 @@ extends Node2D
 @onready var drawing_layer: TileMapLayer = $"Drawing Layer"
 @onready var cursor_layer: TileMapLayer = $"Cursor Layer"
 
+var time: float
+
 var canvas_size = Vector2i(128, 128)
 var canvas_position: Vector2
 var canvas_rect: Rect2i
@@ -14,25 +16,31 @@ var stencil_ink
 
 var cursor_raw_pos: Vector2
 var cursor_pos: Vector2i
-var base_pos: Vector2 = Vector2(160.0, 90.0)
-var cursor_reversed = true
+var base_pos: Vector2
+@export var cursor_reversed = true
+@export var cursor_random = true
+var horiz_speed = 1.5
+var vert_speed = 1.2
+var cursor_amp = 20.0
 
 var last_cursor_position : Vector2i
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var viewport_size = get_viewport().get_visible_rect().size
+	base_pos = Vector2(viewport_size.x / 2, viewport_size.y / 2)
 	canvas_position = Vector2((viewport_size.x - canvas_size.x) / 2, (viewport_size.y - canvas_size.y) / 2)
 	canvas_rect = Rect2i(canvas_position, canvas_size)
 	_get_stencil_data()
 	_draw_stencil()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	time += delta
 	var mouse_position = get_viewport().get_mouse_position()
 	#print("mouse position: ", mouse_position)
 	#print("cursor position: ", cursor_position)
 	
-	cursor_pos = _update_cursor(mouse_position)
+	cursor_pos = _update_cursor(mouse_position, time)
 	_draw_cursor(cursor_pos)
 	
 	if Input.is_action_pressed("select"):
@@ -63,8 +71,12 @@ func _draw_stencil() -> void:
 				stencil_layer.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 			count += 1
 
-func _update_cursor(pos: Vector2) -> Vector2i:
-	var offset = pos - base_pos
+func _update_cursor(pos: Vector2, t: float) -> Vector2i:
+	var offset: Vector2 = pos - base_pos
+	if cursor_random:
+		var rand_x = sin(t * horiz_speed) * cursor_amp
+		var rand_y = cos(t * vert_speed) * cursor_amp
+		offset += Vector2(rand_x, rand_y)
 	if cursor_reversed:
 		offset *= -1
 	cursor_raw_pos = lerp(cursor_raw_pos, base_pos + offset, 0.1)
