@@ -4,12 +4,13 @@ extends Node2D
 @onready var drawing_layer: TileMapLayer = $"Drawing Layer"
 @onready var cursor_layer: TileMapLayer = $"Cursor Layer"
 
-var canvas_size = Vector2i(200, 200)
+var canvas_size = Vector2i(128, 128)
 var canvas_position: Vector2
 var canvas_rect: Rect2i
 
 var tt_path = "res://graphics/tattoo/tt_test.png"
 var stencil_data: Array[Color]
+var stencil_ink
 
 var last_cursor_position : Vector2i
 
@@ -36,9 +37,14 @@ func _process(_delta: float) -> void:
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
 	var image: Image = texture.get_image()
+	var ink = 0
 	for x in image.get_width():
 		for y in image.get_height():
-			stencil_data.append(image.get_pixel(x,y))
+			var color = image.get_pixel(x,y)
+			stencil_data.append(color)
+			if color == Color.BLACK:
+				ink += 1
+	stencil_ink = ink
 
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():

@@ -19,3 +19,20 @@ tile_set = ExtResource("3_qo04j")
 [node name="Cursor Layer" type="TileMapLayer" parent="Drawing Canvas"]
 tile_set = ExtResource("3_qo04j")
 collision_enabled = false
+
+[node name="Debug Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="MatchButton" type="Button" parent="Debug Menu"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 162.0
+offset_right = 386.0
+offset_bottom = 193.0
+scale = Vector2(0.3, 0.3)
+text = "Check match"
+
+[connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]
