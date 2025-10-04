@@ -4,7 +4,7 @@ class_name Main
 
 @onready var drawing_canvas: Node2D = $"Drawing Canvas"
 @onready var drawing_hand: Node2D = $"Drawing Hand"
-@onready var mouse_cursor: Node2D = $"Interface/Mouse Cursor"
+@onready var mouse_cursor: Node2D = $"Mouse Cursor"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i

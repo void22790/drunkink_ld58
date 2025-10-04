@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=20 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
 [ext_resource type="Script" uid="uid://crxbind0p66w1" path="res://scripts/root/drawing_canvas.gd" id="2_cgoxl"]
@@ -7,13 +7,41 @@
 [ext_resource type="Script" uid="uid://qhich4gh7uli" path="res://scripts/root/drawing_hand.gd" id="4_t8wu2"]
 [ext_resource type="Texture2D" uid="uid://3t1dcl8hm2sm" path="res://graphics/func/hand_drawing.png" id="5_d8tfi"]
 [ext_resource type="Script" uid="uid://cbqpqilsv7kmc" path="res://scripts/root/mouse_cursor.gd" id="7_5gd1g"]
+[ext_resource type="Script" uid="uid://d14rb1mgoniw4" path="res://scripts/root/ink_bar.gd" id="7_7wtdl"]
 [ext_resource type="Texture2D" uid="uid://cxikfnmfjy5ga" path="res://graphics/func/gui_frame.png" id="7_aqeut"]
 [ext_resource type="Texture2D" uid="uid://b1yhh8k4yt7lu" path="res://graphics/func/cursor_normal.png" id="8_aqeut"]
+[ext_resource type="FontFile" uid="uid://dmiua4vyuiu88" path="res://graphics/fonts/cc.yal.6w3.ttf" id="8_gsrg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t8wu2"]
 shader = ExtResource("4_d8tfi")
 shader_parameter/intensity = 2.0
 shader_parameter/frequency = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqeut"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 0.50000002375
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wtdl"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 0.50000002375
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn6ia"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 0.50000002375
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n5hw"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dnuo"]
+bg_color = Color(0.22352941, 0.16862746, 0.20784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw5wm"]
+bg_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gsrg7"]
 shader = ExtResource("4_d8tfi")
@@ -52,8 +80,75 @@ position = Vector2(205, 254)
 texture = ExtResource("5_d8tfi")
 offset = Vector2(48, 56)
 
+[node name="GUI Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Ink Bar" type="Control" parent="GUI Control"]
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("7_7wtdl")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI Control/Ink Bar"]
+material = SubResource("ShaderMaterial_aqeut")
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 130.0
+offset_bottom = 22.0
+texture = ExtResource("7_aqeut")
+region_rect = Rect2(0, 0, 12, 12)
+patch_margin_left = 4
+patch_margin_top = 3
+patch_margin_right = 4
+patch_margin_bottom = 5
+
+[node name="Label Shadow" type="Label" parent="GUI Control/Ink Bar"]
+material = SubResource("ShaderMaterial_7wtdl")
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0.22352941, 0.16862746, 0.20784314, 1)
+theme_override_fonts/font = ExtResource("8_gsrg7")
+text = "Ink"
+
+[node name="Label Text" type="Label" parent="GUI Control/Ink Bar"]
+material = SubResource("ShaderMaterial_rn6ia")
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.81960785, 0.7490196, 0.6901961, 1)
+theme_override_fonts/font = ExtResource("8_gsrg7")
+text = "Ink"
+
+[node name="ProgressBar" type="ProgressBar" parent="GUI Control/Ink Bar"]
+material = SubResource("ShaderMaterial_5n5hw")
+layout_mode = 0
+offset_left = 23.0
+offset_top = 6.0
+offset_right = 123.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2dnuo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cw5wm")
+value = 80.0
+show_percentage = false
+
+[node name="Mouse Cursor" type="Node2D" parent="."]
+script = ExtResource("7_5gd1g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mouse Cursor"]
+material = SubResource("ShaderMaterial_gsrg7")
+texture = ExtResource("8_aqeut")
+offset = Vector2(4, 4)
+
 [node name="Debug Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
@@ -67,34 +162,5 @@ offset_right = 386.0
 offset_bottom = 193.0
 scale = Vector2(0.3, 0.3)
 text = "Check match"
-
-[node name="Interface" type="CanvasLayer" parent="."]
-
-[node name="GUI Control" type="Control" parent="Interface"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 180.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Interface/GUI Control"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 123.0
-offset_bottom = 22.0
-texture = ExtResource("7_aqeut")
-region_rect = Rect2(0, 0, 12, 12)
-patch_margin_left = 4
-patch_margin_top = 3
-patch_margin_right = 4
-patch_margin_bottom = 5
-
-[node name="Mouse Cursor" type="Node2D" parent="Interface"]
-script = ExtResource("7_5gd1g")
-
-[node name="Sprite2D" type="Sprite2D" parent="Interface/Mouse Cursor"]
-material = SubResource("ShaderMaterial_gsrg7")
-texture = ExtResource("8_aqeut")
-offset = Vector2(4, 4)
 
 [connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]

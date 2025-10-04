@@ -15,6 +15,7 @@ var stencil_data: Array[Color]
 var stencil_ink: int
 
 var ink_amount: int = 10
+var max_ink_amount: int
 
 var cursor_raw_pos: Vector2
 var cursor_pos: Vector2i
@@ -61,6 +62,7 @@ func _get_stencil_data() -> void:
 				ink += 1
 	stencil_ink = ink
 	ink_amount = (10 * ink) + (ink * 10 * Main.difficulty)
+	max_ink_amount = ink_amount
 
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():
