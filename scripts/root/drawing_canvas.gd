@@ -22,11 +22,11 @@ var base_pos: Vector2
 var horiz_speed = 1.5
 var vert_speed = 1.2
 var cursor_amp = 20.0
+var cursor_weight = 0.1
 
 var last_cursor_position : Vector2i
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var viewport_size = get_viewport().get_visible_rect().size
 	base_pos = Vector2(viewport_size.x / 2, viewport_size.y / 2)
 	canvas_position = Vector2((viewport_size.x - canvas_size.x) / 2, (viewport_size.y - canvas_size.y) / 2)
@@ -37,15 +37,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time += delta
 	var mouse_position = get_viewport().get_mouse_position()
-	#print("mouse position: ", mouse_position)
-	#print("cursor position: ", cursor_position)
 	
 	cursor_pos = _update_cursor(mouse_position, time)
-	_draw_cursor(cursor_pos)
 	
-	if Input.is_action_pressed("select"):
-		if canvas_rect.has_point(cursor_pos):
-			drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
+	if Main.game_state == Main.GameState.DRAWING:
+		#_draw_cursor(cursor_pos)
+		
+		if Input.is_action_pressed("select"):
+			if canvas_rect.has_point(cursor_pos):
+				drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
 
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
@@ -79,7 +79,7 @@ func _update_cursor(pos: Vector2, t: float) -> Vector2i:
 		offset += Vector2(rand_x, rand_y)
 	if cursor_reversed:
 		offset *= -1
-	cursor_raw_pos = lerp(cursor_raw_pos, base_pos + offset, 0.1)
+	cursor_raw_pos = lerp(cursor_raw_pos, base_pos + offset, cursor_weight)
 	var cursor_position = drawing_layer.local_to_map(cursor_raw_pos)
 	return cursor_position
 

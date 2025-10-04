@@ -1,20 +1,34 @@
 extends Node2D
 
+class_name Main
+
 @onready var drawing_canvas: Node2D = $"Drawing Canvas"
+@onready var drawing_hand: Node2D = $"Drawing Hand"
+@onready var mouse_cursor: Node2D = $"Mouse Cursor"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i
 var stencil_ink: int
 
-# Called when the node enters the scene tree for the first time.
+enum GameState {IDLE, DRAWING}
+
+static var game_state = GameState.IDLE
+
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	canvas_position = drawing_canvas.canvas_position
 	canvas_size = drawing_canvas.canvas_size
 	stencil_ink = drawing_canvas.stencil_ink
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("mode"):
+		if game_state == GameState.IDLE:
+			game_state = GameState.DRAWING
+			drawing_hand.ready_up = false
+			mouse_cursor.hide()
+		elif game_state == GameState.DRAWING:
+			game_state = GameState.IDLE
+			mouse_cursor.show()
 
 func _on_match_button_pressed() -> void:
 	var ink = 0

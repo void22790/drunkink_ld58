@@ -1,15 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=11 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
 [ext_resource type="Script" uid="uid://crxbind0p66w1" path="res://scripts/root/drawing_canvas.gd" id="2_cgoxl"]
 [ext_resource type="TileSet" uid="uid://cyoh6otgt64or" path="res://graphics/func/tilesets/drawing_tileset.tres" id="3_qo04j"]
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="4_d8tfi"]
+[ext_resource type="Script" uid="uid://qhich4gh7uli" path="res://scripts/root/drawing_hand.gd" id="4_t8wu2"]
 [ext_resource type="Texture2D" uid="uid://3t1dcl8hm2sm" path="res://graphics/func/hand_drawing.png" id="5_d8tfi"]
+[ext_resource type="Script" uid="uid://cbqpqilsv7kmc" path="res://scripts/root/mouse_cursor.gd" id="7_5gd1g"]
+[ext_resource type="Texture2D" uid="uid://b1yhh8k4yt7lu" path="res://graphics/func/cursor_normal.png" id="8_aqeut"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t8wu2"]
 shader = ExtResource("4_d8tfi")
 shader_parameter/intensity = 2.0
 shader_parameter/frequency = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsrg7"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jc805")
@@ -32,6 +40,23 @@ tile_set = ExtResource("3_qo04j")
 tile_set = ExtResource("3_qo04j")
 collision_enabled = false
 
+[node name="Drawing Hand" type="Node2D" parent="."]
+script = ExtResource("4_t8wu2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Drawing Hand"]
+material = SubResource("ShaderMaterial_t8wu2")
+position = Vector2(205, 254)
+texture = ExtResource("5_d8tfi")
+offset = Vector2(48, 56)
+
+[node name="Mouse Cursor" type="Node2D" parent="."]
+script = ExtResource("7_5gd1g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mouse Cursor"]
+material = SubResource("ShaderMaterial_gsrg7")
+texture = ExtResource("8_aqeut")
+offset = Vector2(4, 4)
+
 [node name="Debug Menu" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -47,13 +72,5 @@ offset_right = 386.0
 offset_bottom = 193.0
 scale = Vector2(0.3, 0.3)
 text = "Check match"
-
-[node name="Drawing Hand" type="Node2D" parent="."]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Drawing Hand"]
-material = SubResource("ShaderMaterial_t8wu2")
-position = Vector2(243, 144)
-texture = ExtResource("5_d8tfi")
 
 [connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]
