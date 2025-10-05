@@ -1,16 +1,79 @@
-[gd_scene load_steps=20 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=33 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
+[ext_resource type="Texture2D" uid="uid://1xe1t3516tp7" path="res://graphics/func/frame.png" id="2_20h35"]
 [ext_resource type="Script" uid="uid://crxbind0p66w1" path="res://scripts/root/drawing_canvas.gd" id="2_cgoxl"]
 [ext_resource type="TileSet" uid="uid://cyoh6otgt64or" path="res://graphics/func/tilesets/drawing_tileset.tres" id="3_qo04j"]
+[ext_resource type="Script" uid="uid://bos2uy5ik4g7v" path="res://scripts/root/timer_hand.gd" id="4_8vuw5"]
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="4_d8tfi"]
 [ext_resource type="Script" uid="uid://qhich4gh7uli" path="res://scripts/root/drawing_hand.gd" id="4_t8wu2"]
+[ext_resource type="Shader" uid="uid://u85geo1t1cw7" path="res://shaders/cut.gdshader" id="5_2dnuo"]
+[ext_resource type="Texture2D" uid="uid://ci4h8cneyd5s6" path="res://graphics/func/cigarette1.png" id="5_5n5hw"]
+[ext_resource type="Texture2D" uid="uid://ddd82v7hakrqu" path="res://graphics/func/left_hand.png" id="5_6p0i4"]
 [ext_resource type="Texture2D" uid="uid://3t1dcl8hm2sm" path="res://graphics/func/hand_drawing.png" id="5_d8tfi"]
+[ext_resource type="Texture2D" uid="uid://b78jn7bkfxgbl" path="res://graphics/func/cigarette2.png" id="7_2dnuo"]
 [ext_resource type="Script" uid="uid://cbqpqilsv7kmc" path="res://scripts/root/mouse_cursor.gd" id="7_5gd1g"]
 [ext_resource type="Script" uid="uid://d14rb1mgoniw4" path="res://scripts/root/ink_bar.gd" id="7_7wtdl"]
 [ext_resource type="Texture2D" uid="uid://cxikfnmfjy5ga" path="res://graphics/func/gui_frame.png" id="7_aqeut"]
 [ext_resource type="Texture2D" uid="uid://b1yhh8k4yt7lu" path="res://graphics/func/cursor_normal.png" id="8_aqeut"]
 [ext_resource type="FontFile" uid="uid://dmiua4vyuiu88" path="res://graphics/fonts/cc.yal.6w3.ttf" id="8_gsrg7"]
+[ext_resource type="Texture2D" uid="uid://c6ghey0umdslq" path="res://graphics/func/left_hand1.png" id="9_20h35"]
+
+[sub_resource type="Animation" id="Animation_20h35"]
+resource_name = "smoking"
+length = 8.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 2.25, 2.5, 2.75, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [-0.62831855, -0.5235988, -0.41887903, -0.3490658503988659, -0.3141592653589793, -0.3490658503988659, -0.41887903, -0.5235988, -0.62831855]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.5, 2.25, 2.5, 2.75, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-144, 14), Vector2(-129, -3), Vector2(-109, -8.000003), Vector2(-70, -14), Vector2(-42.000008, 8), Vector2(-42.000004, 12), Vector2(-42.000008, 8), Vector2(-109, -8.000003), Vector2(-129, -3), Vector2(-144, 14)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ge0vh"]
+_data = {
+&"smoking": SubResource("Animation_20h35")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6p0i4"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cw5wm"]
+shader = ExtResource("5_2dnuo")
+shader_parameter/cut_value = 0.0
+shader_parameter/sprite_height = 42.0
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 2.0000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20h35"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 2.0
+shader_parameter/frequency = 6.0000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ge0vh"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 2.0000000475
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t8wu2"]
 shader = ExtResource("4_d8tfi")
@@ -56,6 +119,11 @@ offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0.28235295, 0.41960785, 0.49803922, 1)
 
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(-4, 3)
+texture = ExtResource("2_20h35")
+centered = false
+
 [node name="Drawing Canvas" type="Node2D" parent="."]
 script = ExtResource("2_cgoxl")
 cursor_reversed = false
@@ -72,6 +140,43 @@ tile_set = ExtResource("3_qo04j")
 collision_enabled = false
 
 [node name="Cig Hand" type="Node2D" parent="."]
+position = Vector2(-144, 14)
+rotation = -0.62831855
+script = ExtResource("4_8vuw5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cig Hand"]
+libraries = {
+&"": SubResource("AnimationLibrary_ge0vh")
+}
+
+[node name="Hand Bot" type="Sprite2D" parent="Cig Hand"]
+material = SubResource("ShaderMaterial_6p0i4")
+position = Vector2(67.99999, 179)
+rotation = 0.62831855
+texture = ExtResource("5_6p0i4")
+centered = false
+offset = Vector2(1, 1)
+
+[node name="Cigarette" type="Sprite2D" parent="Cig Hand"]
+material = SubResource("ShaderMaterial_cw5wm")
+position = Vector2(80, 165)
+texture = ExtResource("5_5n5hw")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 9, 42)
+
+[node name="Light" type="Sprite2D" parent="Cig Hand"]
+material = SubResource("ShaderMaterial_20h35")
+position = Vector2(81, 164)
+texture = ExtResource("7_2dnuo")
+centered = false
+
+[node name="Hand Top" type="Sprite2D" parent="Cig Hand"]
+material = SubResource("ShaderMaterial_ge0vh")
+position = Vector2(70.10671, 174)
+rotation = 0.62831855
+texture = ExtResource("9_20h35")
+centered = false
 
 [node name="Total Timer" type="Timer" parent="Cig Hand"]
 one_shot = true
@@ -208,7 +313,6 @@ texture = ExtResource("8_aqeut")
 offset = Vector2(4, 4)
 
 [node name="Debug Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
@@ -223,4 +327,14 @@ offset_bottom = 193.0
 scale = Vector2(0.3, 0.3)
 text = "Check match"
 
+[node name="StartButton" type="Button" parent="Debug Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 151.0
+offset_right = 342.0
+offset_bottom = 182.0
+scale = Vector2(0.3, 0.3)
+text = "Start"
+
 [connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]
+[connection signal="pressed" from="Debug Menu/StartButton" to="Cig Hand" method="_on_start_button_pressed"]
