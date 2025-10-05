@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://crrinmuw015kd"]
+
+[ext_resource type="AudioStream" uid="uid://byui3nruhe3p6" path="res://sounds/machine.ogg" id="1_giqrd"]
+[ext_resource type="Script" uid="uid://be8vrkqo1pqln" path="res://scripts/control/audio_control.gd" id="1_jrflv"]
+
+[node name="AudioControl" type="Node"]
+script = ExtResource("1_jrflv")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Machine" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("1_giqrd")
+volume_db = -5.0
+bus = &"Sound"

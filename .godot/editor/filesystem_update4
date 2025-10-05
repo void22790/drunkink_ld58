@@ -1,0 +1,9 @@
+res://graphics/func/tilesets/drawing_tileset.tres
+res://scenes/controls/audio_control.tscn
+res://scripts/control/audio_control.gd
+res://default_bus_layout.tres
+res://scenes/root/main.tscn
+res://scripts/root/drawing_canvas.gd
+res://scripts/root/main.gd
+res://scripts/root/phone.gd
+res://shaders/jitter.gdshader

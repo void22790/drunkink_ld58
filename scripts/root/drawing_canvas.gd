@@ -4,6 +4,9 @@ extends Node2D
 @onready var drawing_layer: TileMapLayer = $"Drawing Layer"
 @onready var cursor_layer: TileMapLayer = $"Cursor Layer"
 
+signal out_of_ink
+var has_ink:bool = true
+
 var time: float
 
 var canvas_size = Vector2i(128, 128)
@@ -42,14 +45,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	time += delta
+	if ink_amount <= 0 and has_ink:
+		has_ink = false
+		out_of_ink.emit()
 	var mouse_position = get_viewport().get_mouse_position()
-	
 	cursor_pos = _update_cursor(mouse_position, time)
-	
+	AudioControl.machine.pitch_scale = 1.0
 	if Main.game_state == Main.GameState.DRAWING:
 		#_draw_cursor(cursor_pos)
 		if Input.is_action_pressed("select"):
 			if canvas_rect.has_point(cursor_pos) and ink_amount > 0:
+				AudioControl.machine.pitch_scale = 0.95
 				drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
 				ink_amount -= 1
 
