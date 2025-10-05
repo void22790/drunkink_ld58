@@ -10,7 +10,7 @@ var canvas_size = Vector2i(128, 128)
 var canvas_position: Vector2
 var canvas_rect: Rect2i
 
-var tt_path = "res://graphics/tattoo/tt_test.png"
+var tt_path = "res://graphics/tattoo/easy/tt_heart.png"
 var stencil_data: Array[Color]
 var stencil_ink: int
 
@@ -61,7 +61,7 @@ func _get_stencil_data() -> void:
 			if color == Color.BLACK:
 				ink += 1
 	stencil_ink = ink
-	ink_amount = (10 * ink) + (ink * 10 * Main.difficulty)
+	ink_amount = ink * Main.difficulty + ink
 	max_ink_amount = ink_amount
 
 func _draw_stencil() -> void:

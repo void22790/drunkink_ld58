@@ -14,7 +14,7 @@ enum GameDifficulty {EASY = 2, MEDIUM = 1, HARD = 0}
 enum GameState {IDLE, DRAWING}
 
 static var game_state = GameState.IDLE
-static var difficulty = GameDifficulty.EASY
+static var difficulty = GameDifficulty.HARD
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
