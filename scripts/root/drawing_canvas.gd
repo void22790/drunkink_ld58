@@ -16,6 +16,8 @@ var stencil_ink: int
 
 var ink_amount: int = 10
 var max_ink_amount: int
+var total_time: float
+var time_factor: float = 10.0
 
 var cursor_raw_pos: Vector2
 var cursor_pos: Vector2i
@@ -36,6 +38,7 @@ func _ready() -> void:
 	canvas_rect = Rect2i(canvas_position, canvas_size)
 	_get_stencil_data()
 	_draw_stencil()
+	print(total_time)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -53,15 +56,16 @@ func _process(delta: float) -> void:
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
 	var image: Image = texture.get_image()
-	var ink = 0
+	var ink: float = 0
 	for x in image.get_width():
 		for y in image.get_height():
 			var color = image.get_pixel(x,y)
 			stencil_data.append(color)
 			if color == Color.BLACK:
 				ink += 1
-	stencil_ink = ink
-	ink_amount = ink * Main.difficulty + ink
+	stencil_ink = int(ink)
+	ink_amount = int(ink) * Main.difficulty + int(ink)
+	total_time = floor((ink * Main.difficulty + ink) / time_factor)
 	max_ink_amount = ink_amount
 
 func _draw_stencil() -> void:
