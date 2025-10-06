@@ -1,5 +1,11 @@
-Control
-Label
-TextureButton
+FileDialog
 Sprite2D
+Label
+HBoxContainer
+Button
+Control
 Node
+ColorRect
+CanvasLayer
+AnimationPlayer
+TextureButton

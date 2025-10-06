@@ -1,0 +1,156 @@
+[gd_scene load_steps=15 format=3 uid="uid://dwlx0stb30qvc"]
+
+[ext_resource type="Script" uid="uid://bwvrj6otbt43a" path="res://scripts/root/stats.gd" id="1_rf7xl"]
+[ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_wd12g"]
+[ext_resource type="FontFile" uid="uid://cr4w8q6feu5hn" path="res://graphics/fonts/HandymandiFree.ttf" id="2_rf7xl"]
+[ext_resource type="Theme" uid="uid://fb8i75cnh00j" path="res://graphics/menu_button.tres" id="4_e7h3b"]
+[ext_resource type="Texture2D" uid="uid://btyhoa8kan30q" path="res://graphics/tattoo/tt_fish.png" id="5_ggitk"]
+[ext_resource type="PackedScene" uid="uid://bv5t34hawclwa" path="res://scenes/controls/mouse_cursor.tscn" id="5_hdqa8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7h3b"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggitk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85qai"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 2.0
+shader_parameter/frequency = 3.10000009975
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2f8p"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 2.0
+shader_parameter/frequency = 3.2000001045
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdqa8"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 2.000000095
+shader_parameter/frequency = 3.000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_su5wa"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdbfs"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7glrd"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 4.00000019
+shader_parameter/frequency = 3.000000095
+
+[node name="Stats Screen" type="Node2D"]
+script = ExtResource("1_rf7xl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Stats Label" type="Label" parent="Control"]
+material = SubResource("ShaderMaterial_e7h3b")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 8.0
+offset_right = 26.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.81960785, 0.7490196, 0.6901961, 1)
+theme_override_fonts/font = ExtResource("2_rf7xl")
+text = "INKED!
+"
+
+[node name="HBoxButtonContainer" type="HBoxContainer" parent="Control"]
+material = SubResource("ShaderMaterial_ggitk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 148.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="End Button" type="Button" parent="Control/HBoxButtonContainer"]
+material = SubResource("ShaderMaterial_85qai")
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_e7h3b")
+text = "End Run"
+
+[node name="Collect Button" type="Button" parent="Control/HBoxButtonContainer"]
+material = SubResource("ShaderMaterial_i2f8p")
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_e7h3b")
+text = "Collect"
+
+[node name="Next Button" type="Button" parent="Control/HBoxButtonContainer"]
+material = SubResource("ShaderMaterial_hdqa8")
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme = ExtResource("4_e7h3b")
+text = "Next"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -60.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score Label" type="Label" parent="Control/HBoxContainer"]
+material = SubResource("ShaderMaterial_su5wa")
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("2_rf7xl")
+text = "Score:"
+
+[node name="Score Amount" type="Label" parent="Control/HBoxContainer"]
+material = SubResource("ShaderMaterial_tdbfs")
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("2_rf7xl")
+text = "00000000"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.26666668, 0.2784314, 0.3764706, 1)
+material = SubResource("ShaderMaterial_7glrd")
+position = Vector2(226.6, 83.6)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_ggitk")
+
+[node name="Result Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7glrd")
+position = Vector2(226.59999, 83.59999)
+scale = Vector2(0.8, 0.8)
+
+[node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+
+[node name="Mouse Cursor" parent="." instance=ExtResource("5_hdqa8")]
+
+[connection signal="pressed" from="Control/HBoxButtonContainer/Collect Button" to="." method="_on_collect_button_pressed"]
+[connection signal="pressed" from="Control/HBoxButtonContainer/Next Button" to="." method="_on_next_button_pressed"]

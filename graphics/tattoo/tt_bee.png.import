@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://buillm16bsfqr"
-path="res://.godot/imported/tt_bee.png-fda3e3ffefd19ad884a9f898676aceab.ctex"
+path="res://.godot/imported/tt_bee.png-9ecb1afbffc9c73cbfdadcd5f0f9362e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/tattoo/easy/tt_bee.png"
-dest_files=["res://.godot/imported/tt_bee.png-fda3e3ffefd19ad884a9f898676aceab.ctex"]
+source_file="res://graphics/tattoo/tt_bee.png"
+dest_files=["res://.godot/imported/tt_bee.png-9ecb1afbffc9c73cbfdadcd5f0f9362e.ctex"]
 
 [params]
 

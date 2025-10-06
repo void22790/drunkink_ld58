@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btoxt0q3sd1dj"
-path="res://.godot/imported/tt_cat.png-72adae978865ca61485350775acc7abf.ctex"
+uid="uid://dly0hsuqe8r1p"
+path="res://.godot/imported/tt_heart.png-b12cd7a68fe5b04287af58b4a8fcea40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/tattoo/medium/tt_cat.png"
-dest_files=["res://.godot/imported/tt_cat.png-72adae978865ca61485350775acc7abf.ctex"]
+source_file="res://graphics/tattoo/tt_heart.png"
+dest_files=["res://.godot/imported/tt_heart.png-b12cd7a68fe5b04287af58b4a8fcea40.ctex"]
 
 [params]
 

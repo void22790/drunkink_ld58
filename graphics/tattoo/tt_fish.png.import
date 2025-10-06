@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsxl3tfphls"
-path="res://.godot/imported/tt_test.png-ff2b45f4f064220d6385516c4f79b9a3.ctex"
+uid="uid://btyhoa8kan30q"
+path="res://.godot/imported/tt_fish.png-14bd1a3cca201ef8dd513e1f72654111.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/tattoo/tt_test.png"
-dest_files=["res://.godot/imported/tt_test.png-ff2b45f4f064220d6385516c4f79b9a3.ctex"]
+source_file="res://graphics/tattoo/tt_fish.png"
+dest_files=["res://.godot/imported/tt_fish.png-14bd1a3cca201ef8dd513e1f72654111.ctex"]
 
 [params]
 

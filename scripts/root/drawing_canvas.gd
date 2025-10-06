@@ -9,11 +9,12 @@ var has_ink:bool = true
 
 var time: float
 
+var viewport_size
 var canvas_size = Vector2i(128, 128)
 var canvas_position: Vector2
 var canvas_rect: Rect2i
 
-var tt_path = "res://graphics/tattoo/easy/tt_heart.png"
+var tt_path: String
 var stencil_data: Array[Color]
 var stencil_ink: int
 
@@ -35,13 +36,13 @@ var cursor_weight = 0.1
 var last_cursor_position : Vector2i
 
 func _ready() -> void:
-	var viewport_size = get_viewport().get_visible_rect().size
+	tt_path = GameData.tattoos[randi_range(0,GameData.tattoos.size() - 1)]
+	viewport_size = get_viewport().get_visible_rect().size
 	base_pos = Vector2(viewport_size.x / 2, viewport_size.y / 2)
 	canvas_position = Vector2((viewport_size.x - canvas_size.x) / 2, (viewport_size.y - canvas_size.y) / 2)
 	canvas_rect = Rect2i(canvas_position, canvas_size)
 	_get_stencil_data()
 	_draw_stencil()
-	print(total_time)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -49,6 +50,15 @@ func _process(delta: float) -> void:
 		has_ink = false
 		out_of_ink.emit()
 	var mouse_position = get_viewport().get_mouse_position()
+	if Main.game_state == Main.GameState.DRAWING:
+		if mouse_position.x < 85.0:
+			mouse_position.x = 85.0
+		elif mouse_position.x > 235.0:
+			mouse_position.x = 235.0
+		if mouse_position.y < 14.0:
+			mouse_position.y = 14.0
+		elif mouse_position.y > 163.0:
+			mouse_position.y = 163.0
 	cursor_pos = _update_cursor(mouse_position, time)
 	AudioControl.machine.pitch_scale = 1.0
 	if Main.game_state == Main.GameState.DRAWING:

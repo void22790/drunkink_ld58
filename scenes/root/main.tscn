@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=49 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
 [ext_resource type="Texture2D" uid="uid://1xe1t3516tp7" path="res://graphics/func/frame.png" id="2_20h35"]
@@ -13,10 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ddd82v7hakrqu" path="res://graphics/func/left_hand.png" id="5_6p0i4"]
 [ext_resource type="Texture2D" uid="uid://3t1dcl8hm2sm" path="res://graphics/func/hand_drawing.png" id="5_d8tfi"]
 [ext_resource type="Texture2D" uid="uid://b78jn7bkfxgbl" path="res://graphics/func/cigarette2.png" id="7_2dnuo"]
-[ext_resource type="Script" uid="uid://cbqpqilsv7kmc" path="res://scripts/root/mouse_cursor.gd" id="7_5gd1g"]
 [ext_resource type="Script" uid="uid://d14rb1mgoniw4" path="res://scripts/root/ink_bar.gd" id="7_7wtdl"]
 [ext_resource type="Texture2D" uid="uid://cxikfnmfjy5ga" path="res://graphics/func/gui_frame.png" id="7_aqeut"]
-[ext_resource type="Texture2D" uid="uid://b1yhh8k4yt7lu" path="res://graphics/func/cursor_normal.png" id="8_aqeut"]
 [ext_resource type="FontFile" uid="uid://dmiua4vyuiu88" path="res://graphics/fonts/cc.yal.6w3.ttf" id="8_gsrg7"]
 [ext_resource type="Texture2D" uid="uid://c6ghey0umdslq" path="res://graphics/func/left_hand1.png" id="9_20h35"]
 [ext_resource type="Texture2D" uid="uid://oqh8je5mrfn1" path="res://graphics/func/ashtray_shadow.png" id="17_toygd"]
@@ -28,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dus3fgeu6xp3a" path="res://graphics/func/smartphone.png" id="21_hkivt"]
 [ext_resource type="Texture2D" uid="uid://d1epdowhwfc4x" path="res://graphics/func/smartphone_scr.png" id="22_eiprl"]
 [ext_resource type="Texture2D" uid="uid://euuvoawoone2" path="res://graphics/func/pb_pressed.png" id="22_toygd"]
+[ext_resource type="PackedScene" uid="uid://bv5t34hawclwa" path="res://scenes/controls/mouse_cursor.tscn" id="27_eiprl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aqeut"]
 shader = ExtResource("4_d8tfi")
@@ -155,11 +154,6 @@ shader_parameter/frequency = 2.0000000475
 shader = ExtResource("4_d8tfi")
 shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 6.0000002375
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsrg7"]
-shader = ExtResource("4_d8tfi")
-shader_parameter/intensity = 1.0000000475
-shader_parameter/frequency = 5.00000019
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jc805")
@@ -507,13 +501,7 @@ position = Vector2(205, 254)
 texture = ExtResource("5_d8tfi")
 offset = Vector2(48, 56)
 
-[node name="Mouse Cursor" type="Node2D" parent="."]
-script = ExtResource("7_5gd1g")
-
-[node name="Sprite2D" type="Sprite2D" parent="Mouse Cursor"]
-material = SubResource("ShaderMaterial_gsrg7")
-texture = ExtResource("8_aqeut")
-offset = Vector2(4, 4)
+[node name="Mouse Cursor" parent="." instance=ExtResource("27_eiprl")]
 
 [node name="Debug Menu" type="Control" parent="."]
 visible = false
@@ -540,6 +528,8 @@ offset_bottom = 182.0
 scale = Vector2(0.3, 0.3)
 text = "Start"
 
+[connection signal="toggled" from="GUI Control/Phone/SoundButton" to="GUI Control/Phone" method="_on_sound_button_toggled"]
+[connection signal="toggled" from="GUI Control/Phone/MusicButton" to="GUI Control/Phone" method="_on_music_button_toggled"]
 [connection signal="timeout" from="Timer Hand/Total Timer" to="." method="_on_total_timer_timeout"]
 [connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]
 [connection signal="pressed" from="Debug Menu/StartButton" to="Timer Hand" method="_on_start_button_pressed"]

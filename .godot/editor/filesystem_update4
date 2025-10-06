@@ -7,3 +7,10 @@ res://scripts/root/drawing_canvas.gd
 res://scripts/root/main.gd
 res://scripts/root/phone.gd
 res://shaders/jitter.gdshader
+res://scenes/controls/scene_control.tscn
+res://scripts/control/scene_control.gd
+res://scenes/root/stats.tscn
+res://scenes/controls/game_data.tscn
+res://scripts/control/game_data.gd
+res://scripts/root/stats.gd
+res://graphics/menu_button.tres

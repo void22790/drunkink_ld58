@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b776qwlg6dv08"
-path="res://.godot/imported/tt_bunny.png-4e3686fa098dafbb4c7f5a8da735bc12.ctex"
+uid="uid://btoxt0q3sd1dj"
+path="res://.godot/imported/tt_cat.png-881bdbe5cb4e3b79d9984f1479d0de7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/tattoo/easy/tt_bunny.png"
-dest_files=["res://.godot/imported/tt_bunny.png-4e3686fa098dafbb4c7f5a8da735bc12.ctex"]
+source_file="res://graphics/tattoo/tt_cat.png"
+dest_files=["res://.godot/imported/tt_cat.png-881bdbe5cb4e3b79d9984f1479d0de7f.ctex"]
 
 [params]
 
