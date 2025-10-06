@@ -21,7 +21,7 @@ var stencil_ink: int
 var ink_amount: int = 10
 var max_ink_amount: int
 var total_time: float
-var time_factor: float = 10.0
+var time_factor: float = 50.0
 
 var cursor_raw_pos: Vector2
 var cursor_pos: Vector2i
@@ -30,8 +30,8 @@ var base_pos: Vector2
 @export var cursor_random = true
 var horiz_speed = 1.5
 var vert_speed = 1.2
-var cursor_amp = 20.0
-var cursor_weight = 0.1
+var cursor_amp = GameData.cursor_amp
+var cursor_weight = 0.2
 
 var last_cursor_position : Vector2i
 
@@ -80,9 +80,10 @@ func _get_stencil_data() -> void:
 			if color == Color.BLACK:
 				ink += 1
 	stencil_ink = int(ink)
-	ink_amount = int(ink) * Main.difficulty + int(ink)
-	total_time = floor((ink * Main.difficulty + ink) / time_factor)
+	ink_amount = (int(ink) * Main.difficulty) / 3 + int(ink) + GameData.ink_mp
+	total_time = floor((ink * Main.difficulty + GameData.time_mp) / time_factor)
 	max_ink_amount = ink_amount
+	print(ink_amount)
 
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():

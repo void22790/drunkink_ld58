@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://crrinmuw015kd"]
+[gd_scene load_steps=7 format=3 uid="uid://crrinmuw015kd"]
 
 [ext_resource type="AudioStream" uid="uid://byui3nruhe3p6" path="res://sounds/machine.ogg" id="1_giqrd"]
 [ext_resource type="Script" uid="uid://be8vrkqo1pqln" path="res://scripts/control/audio_control.gd" id="1_jrflv"]
+[ext_resource type="AudioStream" uid="uid://ea7j15yne471" path="res://sounds/Click 2.wav" id="3_c3cqi"]
+[ext_resource type="AudioStream" uid="uid://cekxjst6m2wg6" path="res://music/track_01.ogg" id="3_lqoqm"]
+[ext_resource type="AudioStream" uid="uid://1w6tuameuw1t" path="res://music/track_03.ogg" id="4_c3cqi"]
+[ext_resource type="AudioStream" uid="uid://406yty1q5uvb" path="res://music/track_02.ogg" id="5_xavm4"]
 
 [node name="AudioControl" type="Node"]
 script = ExtResource("1_jrflv")
@@ -12,3 +16,21 @@ script = ExtResource("1_jrflv")
 stream = ExtResource("1_giqrd")
 volume_db = -5.0
 bus = &"Sound"
+
+[node name="Button" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_c3cqi")
+bus = &"Sound"
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Menu" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_lqoqm")
+bus = &"Music"
+
+[node name="Game" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_c3cqi")
+bus = &"Music"
+
+[node name="Stats" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("5_xavm4")
+bus = &"Music"

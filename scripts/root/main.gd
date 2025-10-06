@@ -8,6 +8,8 @@ class_name Main
 @onready var mouse_cursor: Node2D = $"Mouse Cursor"
 @onready var start_text: Control = $"GUI Control/Start Text"
 @onready var gui_control: Control = $"GUI Control"
+@onready var number_shadow: Label = $"GUI Control/Level/Number Shadow"
+@onready var number_text: Label = $"GUI Control/Level/Number Text"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i
@@ -21,14 +23,17 @@ enum GameDifficulty {EASY = 2, MEDIUM = 1, HARD = 0}
 enum GameState {IDLE, DRAWING}
 
 static var game_state = GameState.IDLE
-static var difficulty = GameDifficulty.HARD
+static var difficulty = GameDifficulty.EASY
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	difficulty = GameData.difficulty
+	AudioControl.game.play()
 	canvas_position = drawing_canvas.canvas_position
 	canvas_size = drawing_canvas.canvas_size
 	stencil_ink = drawing_canvas.stencil_ink
 	drawing_canvas.out_of_ink.connect(_out_of_ink)
+	number_shadow.text = str(GameData.tt_number)
+	number_text.text = str(GameData.tt_number)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("mode"):
@@ -60,10 +65,12 @@ func _update_score() -> void:
 			else:
 				image_data.append(Color.WHITE)
 	var result: float = float(ink) / float(stencil_ink) * 100
+	GameData.tt_number += 1
 	GameData.image_data.clear()
 	GameData.image_data = image_data.duplicate()
 	GameData.last_match = int(floor(result))
 	AudioControl.machine.stop()
+	AudioControl.game.stop()
 	game_state = GameState.IDLE
 	SceneControl.change_scene("stats")
 	print("Match %: ", result)

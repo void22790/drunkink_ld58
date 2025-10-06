@@ -5,7 +5,8 @@ extends Node2D
 var scenes = {
 "main": "res://scenes/root/main.tscn",
 "stats": "res://scenes/root/stats.tscn",
-"menu": ""
+"menu": "res://scenes/root/menu.tscn",
+"upgrade": "res://scenes/root/upgrade_screen.tscn"
 }
 
 func change_scene(scene_name: String) -> void:

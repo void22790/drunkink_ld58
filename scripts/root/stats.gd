@@ -1,21 +1,28 @@
 extends Node2D
 
-var total_score: int
 var image: Image
-@onready var score_amount: Label = $"Control/HBoxContainer/Score Amount"
+var stars_to_show: int = 0
+var count: int = 0
+
 @onready var result_sprite: Sprite2D = $"Result Sprite"
-@onready var file_dialog: FileDialog = $FileDialog
+@onready var level_up_timer: Timer = $"Level Up Timer"
+
+@onready var star: Sprite2D = $Stars/Star
+@onready var star_2: Sprite2D = $Stars/Star2
+@onready var star_3: Sprite2D = $Stars/Star3
 
 func _ready() -> void:
+	AudioControl.stats.play()
 	_create_image()
-	total_score = 0
-
-func _process(_delta: float) -> void:
-	if total_score != GameData.last_match:
-		total_score += 1
-	score_amount.text = str(total_score).pad_zeros(8)
+	if GameData.last_match > 0 and GameData.last_match <= 20:
+		stars_to_show = 1
+	elif GameData.last_match > 20 and GameData.last_match <= 50:
+		stars_to_show = 2
+	elif GameData.last_match > 50:
+		stars_to_show = 3
 
 func _on_next_button_pressed() -> void:
+	AudioControl.button.play()
 	SceneControl.change_scene("main")
 
 func _create_image() -> void:
@@ -34,3 +41,31 @@ func _create_image() -> void:
 
 func _on_collect_button_pressed() -> void:
 	pass
+
+func _on_level_up_timer_timeout() -> void:
+	match stars_to_show:
+		1:
+			star.show()
+		2:
+			if count == 0:
+				star.show()
+				count += 1
+				level_up_timer.start(0.5)
+			elif count == 1:
+				star_2.show()
+		3:
+			if count == 0:
+				star.show()
+				count += 1
+				level_up_timer.start(0.5)
+			elif count == 1:
+				star_2.show()
+				count += 1
+				level_up_timer.start(0.5)
+			elif count == 2:
+				star_3.show()
+
+func _on_end_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.stats.stop()
+	SceneControl.change_scene("menu")

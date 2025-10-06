@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfavilv0enl4l"]
+
+[ext_resource type="FontFile" uid="uid://cr4w8q6feu5hn" path="res://graphics/fonts/HandymandiFree.ttf" id="1_40jfs"]
+
+[node name="Upgrade Screen" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.47843137, 0.6117647, 0.5882353, 1)
+theme_override_fonts/font = ExtResource("1_40jfs")
+text = "Pick your upgrade"

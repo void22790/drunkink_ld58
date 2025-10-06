@@ -1,0 +1,203 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjl1rskjen3r0"]
+
+[ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_mn3au"]
+[ext_resource type="Script" uid="uid://ckq33cgdphw0f" path="res://scripts/root/menu.gd" id="1_uvd6o"]
+[ext_resource type="Theme" uid="uid://fb8i75cnh00j" path="res://graphics/menu_button.tres" id="2_uvd6o"]
+[ext_resource type="Texture2D" uid="uid://c4bx2x6lnoe57" path="res://graphics/logo2.png" id="3_pdwgi"]
+[ext_resource type="FontFile" uid="uid://dmiua4vyuiu88" path="res://graphics/fonts/cc.yal.6w3.ttf" id="4_2wrav"]
+[ext_resource type="PackedScene" uid="uid://bv5t34hawclwa" path="res://scenes/controls/mouse_cursor.tscn" id="6_pdwgi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ugusu"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xddw"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_waujs"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0a4s"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s8jm"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 20.0
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvd6o"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdwgi"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_uvd6o")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Version Label" type="Label" parent="."]
+offset_left = 248.0
+offset_top = 169.0
+offset_right = 318.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(0.26666668, 0.2784314, 0.3764706, 1)
+theme_override_fonts/font = ExtResource("4_2wrav")
+text = "voidsrc irensa v1.0"
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 21.0
+offset_right = 301.0
+offset_bottom = 75.0
+
+[node name="Drunk Mode Button" type="Button" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_ugusu")
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Drunk Mode"
+
+[node name="Freestyle Button" type="Button" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_0xddw")
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Freestyle
+"
+
+[node name="Collection Button" type="Button" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_waujs")
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Collection"
+
+[node name="Options Button" type="Button" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_t0a4s")
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Options"
+
+[node name="Logo2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1s8jm")
+position = Vector2(104.00001, 86.00001)
+rotation = -0.10471976
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_pdwgi")
+
+[node name="Drunk Mode" type="Control" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_uvd6o")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Back from DM Button" type="Button" parent="Drunk Mode"]
+use_parent_material = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 0
+offset_left = 238.0
+offset_top = 140.0
+offset_right = 286.0
+offset_bottom = 159.0
+theme = ExtResource("2_uvd6o")
+text = "Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Drunk Mode"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 215.0
+offset_top = 21.0
+offset_right = 286.0
+offset_bottom = 86.0
+
+[node name="Easy Button" type="Button" parent="Drunk Mode/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Easy"
+
+[node name="Medium Button" type="Button" parent="Drunk Mode/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Medium"
+
+[node name="Hard Button" type="Button" parent="Drunk Mode/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Hard"
+
+[node name="Options" type="Control" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_pdwgi")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Back Options Button" type="Button" parent="Options"]
+use_parent_material = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 0
+offset_left = 250.0
+offset_top = 140.0
+offset_right = 298.0
+offset_bottom = 159.0
+theme = ExtResource("2_uvd6o")
+text = "Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 215.0
+offset_top = 21.0
+offset_right = 300.0
+offset_bottom = 63.0
+
+[node name="Sound Button" type="Button" parent="Options/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+toggle_mode = true
+text = "Sound On"
+
+[node name="Music Button" type="Button" parent="Options/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+toggle_mode = true
+text = "Music On"
+
+[node name="Mouse Cursor" parent="." instance=ExtResource("6_pdwgi")]
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Drunk Mode Button" to="." method="_on_drunk_mode_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Options Button" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Drunk Mode/Back from DM Button" to="." method="_on_back_from_dm_button_pressed"]
+[connection signal="pressed" from="Drunk Mode/VBoxContainer/Easy Button" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="Drunk Mode/VBoxContainer/Medium Button" to="." method="_on_medium_button_pressed"]
+[connection signal="pressed" from="Drunk Mode/VBoxContainer/Hard Button" to="." method="_on_hard_button_pressed"]
+[connection signal="pressed" from="Options/Back Options Button" to="." method="_on_back_options_button_pressed"]
+[connection signal="toggled" from="Options/VBoxContainer/Sound Button" to="." method="_on_sound_button_toggled"]
+[connection signal="toggled" from="Options/VBoxContainer/Music Button" to="." method="_on_music_button_toggled"]

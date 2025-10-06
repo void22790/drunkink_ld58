@@ -1,0 +1,73 @@
+extends Node2D
+
+@onready var main_menu: Control = $MainMenu
+@onready var drunk_mode: Control = $"Drunk Mode"
+@onready var options: Control = $Options
+@onready var sound_button: Button = $"Options/VBoxContainer/Sound Button"
+@onready var music_button: Button = $"Options/VBoxContainer/Music Button"
+
+func _ready() -> void:
+	AudioControl.menu.play()
+
+func _process(_delta: float) -> void:
+	pass
+
+func _on_drunk_mode_button_pressed() -> void:
+	AudioControl.button.play()
+	main_menu.hide()
+	drunk_mode.show()
+
+func _on_back_from_dm_button_pressed() -> void:
+	AudioControl.button.play()
+	main_menu.show()
+	drunk_mode.hide()
+
+func _on_easy_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.menu.stop()
+	GameData.difficulty = Main.GameDifficulty.EASY
+	SceneControl.change_scene("main")
+
+func _on_medium_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.menu.stop()
+	GameData.difficulty = Main.GameDifficulty.MEDIUM
+	SceneControl.change_scene("main")
+
+func _on_hard_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.menu.stop()
+	GameData.difficulty = Main.GameDifficulty.HARD
+	SceneControl.change_scene("main")
+
+func _on_options_button_pressed() -> void:
+	AudioControl.button.play()
+	main_menu.hide()
+	options.show()
+
+func _on_back_options_button_pressed() -> void:
+	AudioControl.button.play()
+	main_menu.show()
+	options.hide()
+
+func _on_sound_button_toggled(toggled_on: bool) -> void:
+	var sound = AudioServer.get_bus_index("Sound")
+	AudioServer.set_bus_mute(sound, toggled_on)
+	if toggled_on:
+		GameData.sound_on = false
+		sound_button.text = "Sound Off"
+	else:
+		GameData.sound_on = true
+		sound_button.text = "Sound On"
+	AudioControl.button.play()
+
+func _on_music_button_toggled(toggled_on: bool) -> void:
+	var music = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_mute(music, toggled_on)
+	if toggled_on:
+		GameData.music_on = false
+		music_button.text = "Music Off"
+	else:
+		GameData.music_on = true
+		music_button.text = "Music On"
+	AudioControl.button.play()

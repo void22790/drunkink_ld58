@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float intensity : hint_range(0.0, 10.0) = 2.0;
+uniform float intensity : hint_range(0.0, 20.0) = 2.0;
 uniform float frequency : hint_range(1.0, 60.0) = 12.0;
 
 float rand(vec2 co) {

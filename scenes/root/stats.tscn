@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwlx0stb30qvc"]
+[gd_scene load_steps=17 format=3 uid="uid://dwlx0stb30qvc"]
 
 [ext_resource type="Script" uid="uid://bwvrj6otbt43a" path="res://scripts/root/stats.gd" id="1_rf7xl"]
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_wd12g"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://fb8i75cnh00j" path="res://graphics/menu_button.tres" id="4_e7h3b"]
 [ext_resource type="Texture2D" uid="uid://btyhoa8kan30q" path="res://graphics/tattoo/tt_fish.png" id="5_ggitk"]
 [ext_resource type="PackedScene" uid="uid://bv5t34hawclwa" path="res://scenes/controls/mouse_cursor.tscn" id="5_hdqa8"]
+[ext_resource type="Texture2D" uid="uid://clsvgokjyy036" path="res://graphics/func/star.png" id="7_85qai"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e7h3b"]
 shader = ExtResource("1_wd12g")
@@ -29,6 +30,11 @@ shader = ExtResource("1_wd12g")
 shader_parameter/intensity = 2.000000095
 shader_parameter/frequency = 3.000000095
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7glrd"]
+shader = ExtResource("1_wd12g")
+shader_parameter/intensity = 4.00000019
+shader_parameter/frequency = 3.000000095
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_su5wa"]
 shader = ExtResource("1_wd12g")
 shader_parameter/intensity = 1.0000000475
@@ -39,10 +45,10 @@ shader = ExtResource("1_wd12g")
 shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 5.00000019
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7glrd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1isfu"]
 shader = ExtResource("1_wd12g")
-shader_parameter/intensity = 4.00000019
-shader_parameter/frequency = 3.000000095
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
 
 [node name="Stats Screen" type="Node2D"]
 script = ExtResource("1_rf7xl")
@@ -108,49 +114,46 @@ layout_mode = 2
 theme = ExtResource("4_e7h3b")
 text = "Next"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.0
-offset_top = -60.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Score Label" type="Label" parent="Control/HBoxContainer"]
-material = SubResource("ShaderMaterial_su5wa")
-layout_mode = 2
-theme_override_colors/font_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
-theme_override_fonts/font = ExtResource("2_rf7xl")
-text = "Score:"
-
-[node name="Score Amount" type="Label" parent="Control/HBoxContainer"]
-material = SubResource("ShaderMaterial_tdbfs")
-layout_mode = 2
-theme_override_colors/font_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
-theme_override_fonts/font = ExtResource("2_rf7xl")
-text = "00000000"
-
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0.26666668, 0.2784314, 0.3764706, 1)
 material = SubResource("ShaderMaterial_7glrd")
-position = Vector2(226.6, 83.6)
-scale = Vector2(0.9, 0.9)
+position = Vector2(160, 65)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_ggitk")
 
 [node name="Result Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_7glrd")
-position = Vector2(226.59999, 83.59999)
-scale = Vector2(0.8, 0.8)
-
-[node name="FileDialog" type="FileDialog" parent="."]
-oversampling_override = 1.0
+position = Vector2(160, 65)
+scale = Vector2(0.5, 0.5)
 
 [node name="Mouse Cursor" parent="." instance=ExtResource("5_hdqa8")]
 
+[node name="Level Up Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="Star" type="Sprite2D" parent="Stars"]
+visible = false
+material = SubResource("ShaderMaterial_su5wa")
+position = Vector2(120.5, 125)
+texture = ExtResource("7_85qai")
+
+[node name="Star2" type="Sprite2D" parent="Stars"]
+visible = false
+material = SubResource("ShaderMaterial_tdbfs")
+position = Vector2(160.5, 125)
+texture = ExtResource("7_85qai")
+
+[node name="Star3" type="Sprite2D" parent="Stars"]
+visible = false
+material = SubResource("ShaderMaterial_1isfu")
+position = Vector2(200.5, 125)
+texture = ExtResource("7_85qai")
+
+[connection signal="pressed" from="Control/HBoxButtonContainer/End Button" to="." method="_on_end_button_pressed"]
 [connection signal="pressed" from="Control/HBoxButtonContainer/Collect Button" to="." method="_on_collect_button_pressed"]
 [connection signal="pressed" from="Control/HBoxButtonContainer/Next Button" to="." method="_on_next_button_pressed"]
+[connection signal="timeout" from="Level Up Timer" to="." method="_on_level_up_timer_timeout"]
