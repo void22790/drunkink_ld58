@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjl1rskjen3r0"]
+[gd_scene load_steps=16 format=3 uid="uid://bjl1rskjen3r0"]
 
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_mn3au"]
 [ext_resource type="Script" uid="uid://ckq33cgdphw0f" path="res://scripts/root/menu.gd" id="1_uvd6o"]
@@ -12,6 +12,11 @@ shader = ExtResource("1_mn3au")
 shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 5.00000019
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdwgi"]
+bg_color = Color(0.44313726, 0.24705882, 0.32156864, 1)
+border_width_top = 3
+border_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xddw"]
 shader = ExtResource("1_mn3au")
 shader_parameter/intensity = 1.0000000475
@@ -23,6 +28,11 @@ shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 5.00000019
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0a4s"]
+shader = ExtResource("1_mn3au")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wrav"]
 shader = ExtResource("1_mn3au")
 shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 5.00000019
@@ -76,6 +86,8 @@ offset_bottom = 75.0
 material = SubResource("ShaderMaterial_ugusu")
 layout_mode = 2
 theme = ExtResource("2_uvd6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pdwgi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pdwgi")
 text = "Drunk Mode"
 
 [node name="Freestyle Button" type="Button" parent="MainMenu/VBoxContainer"]
@@ -89,6 +101,7 @@ text = "Freestyle
 material = SubResource("ShaderMaterial_waujs")
 layout_mode = 2
 theme = ExtResource("2_uvd6o")
+disabled = true
 text = "Collection"
 
 [node name="Options Button" type="Button" parent="MainMenu/VBoxContainer"]
@@ -96,6 +109,12 @@ material = SubResource("ShaderMaterial_t0a4s")
 layout_mode = 2
 theme = ExtResource("2_uvd6o")
 text = "Options"
+
+[node name="Quit Button" type="Button" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_2wrav")
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Quit"
 
 [node name="Logo2" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_1s8jm")
@@ -193,7 +212,9 @@ text = "Music On"
 [node name="Mouse Cursor" parent="." instance=ExtResource("6_pdwgi")]
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/Drunk Mode Button" to="." method="_on_drunk_mode_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Freestyle Button" to="." method="_on_freestyle_button_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options Button" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Drunk Mode/Back from DM Button" to="." method="_on_back_from_dm_button_pressed"]
 [connection signal="pressed" from="Drunk Mode/VBoxContainer/Easy Button" to="." method="_on_easy_button_pressed"]
 [connection signal="pressed" from="Drunk Mode/VBoxContainer/Medium Button" to="." method="_on_medium_button_pressed"]

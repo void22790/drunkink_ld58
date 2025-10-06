@@ -12,6 +12,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("end"):
+		get_tree().quit()
+
 func _on_drunk_mode_button_pressed() -> void:
 	AudioControl.button.play()
 	main_menu.hide()
@@ -26,18 +30,27 @@ func _on_easy_button_pressed() -> void:
 	AudioControl.button.play()
 	AudioControl.menu.stop()
 	GameData.difficulty = Main.GameDifficulty.EASY
+	GameData.type = Main.GameType.DRUNK
+	GameData.cursor_amp = 10.0
+	GameData.cursor_weight = 0.1
 	SceneControl.change_scene("main")
 
 func _on_medium_button_pressed() -> void:
 	AudioControl.button.play()
 	AudioControl.menu.stop()
 	GameData.difficulty = Main.GameDifficulty.MEDIUM
+	GameData.type = Main.GameType.DRUNK
+	GameData.cursor_amp = 15.0
+	GameData.cursor_weight = 0.05
 	SceneControl.change_scene("main")
 
 func _on_hard_button_pressed() -> void:
 	AudioControl.button.play()
 	AudioControl.menu.stop()
 	GameData.difficulty = Main.GameDifficulty.HARD
+	GameData.type = Main.GameType.DRUNK
+	GameData.cursor_amp = 20.0
+	GameData.cursor_weight = 0.05
 	SceneControl.change_scene("main")
 
 func _on_options_button_pressed() -> void:
@@ -71,3 +84,12 @@ func _on_music_button_toggled(toggled_on: bool) -> void:
 		GameData.music_on = true
 		music_button.text = "Music On"
 	AudioControl.button.play()
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+
+func _on_freestyle_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.menu.stop()
+	GameData.type = Main.GameType.FREE
+	SceneControl.change_scene("main")

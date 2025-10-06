@@ -1,6 +1,5 @@
 extends Node2D
 
-var image: Image
 var stars_to_show: int = 0
 var count: int = 0
 
@@ -23,24 +22,29 @@ func _ready() -> void:
 
 func _on_next_button_pressed() -> void:
 	AudioControl.button.play()
-	SceneControl.change_scene("main")
+	if GameData.type == Main.GameType.FREE:
+		AudioControl.stats.stop()
+		SceneControl.change_scene("main")
+	if GameData.type == Main.GameType.DRUNK:
+		SceneControl.change_scene("upgrade")
 
 func _create_image() -> void:
-	image = Image.create(128, 128, false, Image.FORMAT_RGBA8)
+	GameData.image = Image.create(128, 128, false, Image.FORMAT_RGBA8)
 	
 	for y in 128:
 		for x in 128:
 			var index = y * 128 + x
-			image.set_pixel(x,y, GameData.image_data[index])
+			GameData.image.set_pixel(x,y, GameData.image_data[index])
 	
-	image.rotate_90(ClockDirection.CLOCKWISE)
-	image.flip_x()
+	GameData.image.rotate_90(ClockDirection.CLOCKWISE)
+	GameData.image.flip_x()
 	
-	var texture = ImageTexture.create_from_image(image)
+	var texture = ImageTexture.create_from_image(GameData.image)
 	result_sprite.texture = texture
 
 func _on_collect_button_pressed() -> void:
-	pass
+	AudioControl.button.play()
+	SceneControl.change_scene("collect")
 
 func _on_level_up_timer_timeout() -> void:
 	match stars_to_show:

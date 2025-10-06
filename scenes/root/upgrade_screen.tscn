@@ -1,8 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfavilv0enl4l"]
+[gd_scene load_steps=19 format=3 uid="uid://cfavilv0enl4l"]
 
 [ext_resource type="FontFile" uid="uid://cr4w8q6feu5hn" path="res://graphics/fonts/HandymandiFree.ttf" id="1_40jfs"]
+[ext_resource type="Script" uid="uid://11cohd1fu4vu" path="res://scripts/root/upgrade_screen.gd" id="1_lf1s6"]
+[ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_tx4qp"]
+[ext_resource type="Texture2D" uid="uid://tshet2lswlet" path="res://graphics/func/ink_button_normal.png" id="3_lf1s6"]
+[ext_resource type="Texture2D" uid="uid://d1lobeqfufupd" path="res://graphics/func/ink_button_pressed.png" id="4_d2oy5"]
+[ext_resource type="Texture2D" uid="uid://bt7t0d0xatx6u" path="res://graphics/func/time_button_normal.png" id="5_mnf8q"]
+[ext_resource type="Texture2D" uid="uid://dwmfj2w5pdilx" path="res://graphics/func/time_button_pressed.png" id="6_5lu1m"]
+[ext_resource type="Texture2D" uid="uid://oj4poie38svv" path="res://graphics/func/steady_button_normal.png" id="7_sin4c"]
+[ext_resource type="Texture2D" uid="uid://e1h61ll8ca76" path="res://graphics/func/steady_button_pressed.png" id="8_s13lq"]
+[ext_resource type="Texture2D" uid="uid://qemt2mbcnwg1" path="res://graphics/func/speed_button_normal.png" id="9_gfy82"]
+[ext_resource type="Texture2D" uid="uid://i3vcpy5yqmst" path="res://graphics/func/speed_button_pressed.png" id="10_decaw"]
+[ext_resource type="FontFile" uid="uid://dmiua4vyuiu88" path="res://graphics/fonts/cc.yal.6w3.ttf" id="11_lfxyu"]
+[ext_resource type="PackedScene" uid="uid://bv5t34hawclwa" path="res://scenes/controls/mouse_cursor.tscn" id="13_d2oy5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol7fn"]
+shader = ExtResource("1_tx4qp")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t005"]
+shader = ExtResource("1_tx4qp")
+shader_parameter/intensity = 2.0
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6fae"]
+shader = ExtResource("1_tx4qp")
+shader_parameter/intensity = 2.10000009975
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ygu0"]
+shader = ExtResource("1_tx4qp")
+shader_parameter/intensity = 1.90000009025
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jfxt"]
+shader = ExtResource("1_tx4qp")
+shader_parameter/intensity = 2.0
+shader_parameter/frequency = 5.00000019
 
 [node name="Upgrade Screen" type="Node2D"]
+script = ExtResource("1_lf1s6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 320.0
@@ -16,6 +54,7 @@ offset_right = 320.0
 offset_bottom = 180.0
 
 [node name="Label" type="Label" parent="Control"]
+material = SubResource("ShaderMaterial_ol7fn")
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -23,8 +62,83 @@ anchor_right = 0.5
 offset_left = -66.0
 offset_top = 8.0
 offset_right = 66.0
-offset_bottom = 31.0
+offset_bottom = 24.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.47843137, 0.6117647, 0.5882353, 1)
 theme_override_fonts/font = ExtResource("1_40jfs")
 text = "Pick your upgrade"
+
+[node name="Ink Button" type="TextureButton" parent="Control"]
+material = SubResource("ShaderMaterial_0t005")
+layout_mode = 0
+offset_left = 105.0
+offset_top = 45.0
+offset_right = 153.0
+offset_bottom = 93.0
+texture_normal = ExtResource("3_lf1s6")
+texture_pressed = ExtResource("4_d2oy5")
+texture_hover = ExtResource("3_lf1s6")
+
+[node name="Time Button" type="TextureButton" parent="Control"]
+material = SubResource("ShaderMaterial_k6fae")
+layout_mode = 0
+offset_left = 165.0
+offset_top = 45.0
+offset_right = 213.0
+offset_bottom = 93.0
+texture_normal = ExtResource("5_mnf8q")
+texture_pressed = ExtResource("6_5lu1m")
+texture_hover = ExtResource("5_mnf8q")
+
+[node name="Steady Button" type="TextureButton" parent="Control"]
+material = SubResource("ShaderMaterial_8ygu0")
+layout_mode = 0
+offset_left = 105.0
+offset_top = 100.0
+offset_right = 153.0
+offset_bottom = 148.0
+texture_normal = ExtResource("7_sin4c")
+texture_pressed = ExtResource("8_s13lq")
+texture_hover = ExtResource("7_sin4c")
+
+[node name="Speed Button" type="TextureButton" parent="Control"]
+material = SubResource("ShaderMaterial_7jfxt")
+layout_mode = 0
+offset_left = 165.0
+offset_top = 100.0
+offset_right = 213.0
+offset_bottom = 148.0
+texture_normal = ExtResource("9_gfy82")
+texture_pressed = ExtResource("10_decaw")
+texture_hover = ExtResource("9_gfy82")
+
+[node name="Description" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = 70.0
+offset_right = 7.5
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.81960785, 0.7490196, 0.6901961, 1)
+theme_override_fonts/font = ExtResource("11_lfxyu")
+
+[node name="Mouse Cursor" parent="." instance=ExtResource("13_d2oy5")]
+
+[connection signal="mouse_entered" from="Control/Ink Button" to="." method="_on_ink_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Ink Button" to="." method="_on_ink_button_mouse_exited"]
+[connection signal="pressed" from="Control/Ink Button" to="." method="_on_ink_button_pressed"]
+[connection signal="mouse_entered" from="Control/Time Button" to="." method="_on_time_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Time Button" to="." method="_on_time_button_mouse_exited"]
+[connection signal="pressed" from="Control/Time Button" to="." method="_on_time_button_pressed"]
+[connection signal="mouse_entered" from="Control/Steady Button" to="." method="_on_steady_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Steady Button" to="." method="_on_steady_button_mouse_exited"]
+[connection signal="pressed" from="Control/Steady Button" to="." method="_on_steady_button_pressed"]
+[connection signal="mouse_entered" from="Control/Speed Button" to="." method="_on_speed_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Speed Button" to="." method="_on_speed_button_mouse_exited"]
+[connection signal="pressed" from="Control/Speed Button" to="." method="_on_speed_button_pressed"]

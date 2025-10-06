@@ -1,14 +1,14 @@
 Button
-VBoxContainer
+HBoxContainer
+Label
 Control
+LineEdit      - Matches the "input" keyword.
+ColorRect
+TextureButton
+TextureRect
+VBoxContainer
 AudioStreamPlayer
 Node
-Label
-ColorRect
 Node2D
 ProgressBar
 Timer
-FileDialog
-Sprite2D
-HBoxContainer
-CanvasLayer

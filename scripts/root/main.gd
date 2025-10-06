@@ -10,6 +10,8 @@ class_name Main
 @onready var gui_control: Control = $"GUI Control"
 @onready var number_shadow: Label = $"GUI Control/Level/Number Shadow"
 @onready var number_text: Label = $"GUI Control/Level/Number Text"
+@onready var ink_bar: Control = $"GUI Control/Ink Bar"
+@onready var end_run_button: Button = $"GUI Control/End Run Button"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i
@@ -21,11 +23,14 @@ var init_drawing: bool = false
 
 enum GameDifficulty {EASY = 2, MEDIUM = 1, HARD = 0}
 enum GameState {IDLE, DRAWING}
+enum GameType {DRUNK, FREE}
 
+static var game_type = GameType.DRUNK
 static var game_state = GameState.IDLE
 static var difficulty = GameDifficulty.EASY
 
 func _ready() -> void:
+	_setup_type()
 	difficulty = GameData.difficulty
 	AudioControl.game.play()
 	canvas_position = drawing_canvas.canvas_position
@@ -34,6 +39,23 @@ func _ready() -> void:
 	drawing_canvas.out_of_ink.connect(_out_of_ink)
 	number_shadow.text = str(GameData.tt_number)
 	number_text.text = str(GameData.tt_number)
+
+func _setup_type() -> void:
+	game_type = GameData.type
+	if game_type == GameType.FREE:
+		ink_bar.hide()
+		timer_hand.hide()
+		drawing_canvas.cursor_reversed = false
+		drawing_canvas.cursor_random = false
+		drawing_canvas.cursor_weight = 0.2
+		end_run_button.show()
+	if game_type == GameType.DRUNK:
+		ink_bar.show()
+		timer_hand.show()
+		drawing_canvas.cursor_reversed = false
+		drawing_canvas.cursor_random = true
+		drawing_canvas.cursor_weight = GameData.cursor_weight
+		end_run_button.hide()
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("mode"):
@@ -51,6 +73,10 @@ func _input(_event: InputEvent) -> void:
 			AudioControl.machine.stop()
 			game_state = GameState.IDLE
 			mouse_cursor.show()
+	if Input.is_action_just_pressed("end"):
+		AudioControl.game.stop()
+		AudioControl.machine.stop()
+		SceneControl.change_scene("menu")
 
 func _update_score() -> void:
 	var ink = 0
@@ -73,20 +99,24 @@ func _update_score() -> void:
 	AudioControl.game.stop()
 	game_state = GameState.IDLE
 	SceneControl.change_scene("stats")
-	print("Match %: ", result)
+	#print("Match %: ", result)
 
 func _on_match_button_pressed() -> void:
-	SceneControl.change_scene("stats")
 	_update_score()
 
 func _start_drawing() -> void:
 	start_text.hide()
-	timer_hand.total_timer.set_wait_time(drawing_canvas.total_time)
-	timer_hand.total_timer.start()
-	timer_hand.timer_on = true
+	if game_type == GameType.DRUNK:
+		timer_hand.total_timer.set_wait_time(drawing_canvas.total_time)
+		timer_hand.total_timer.start()
+		timer_hand.timer_on = true
 
 func _on_total_timer_timeout() -> void:
 	_update_score()
 
 func _out_of_ink() -> void:
+	_update_score()
+
+func _on_end_run_button_pressed() -> void:
+	AudioControl.button.play()
 	_update_score()

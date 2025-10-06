@@ -41,8 +41,11 @@ func _ready() -> void:
 	base_pos = Vector2(viewport_size.x / 2, viewport_size.y / 2)
 	canvas_position = Vector2((viewport_size.x - canvas_size.x) / 2, (viewport_size.y - canvas_size.y) / 2)
 	canvas_rect = Rect2i(canvas_position, canvas_size)
-	_get_stencil_data()
-	_draw_stencil()
+	if GameData.type == Main.GameType.DRUNK:
+		_get_stencil_data()
+		_draw_stencil()
+	if GameData.type == Main.GameType.FREE:
+		_draw_empty_canvas()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -67,7 +70,8 @@ func _process(delta: float) -> void:
 			if canvas_rect.has_point(cursor_pos) and ink_amount > 0:
 				AudioControl.machine.pitch_scale = 0.95
 				drawing_layer.set_cell(cursor_pos, 0, Vector2i(1,0))
-				ink_amount -= 1
+				if GameData.type == Main.GameType.DRUNK:
+					ink_amount -= 1
 
 func _get_stencil_data() -> void:
 	var texture: Texture2D = load(tt_path)
@@ -80,10 +84,15 @@ func _get_stencil_data() -> void:
 			if color == Color.BLACK:
 				ink += 1
 	stencil_ink = int(ink)
-	ink_amount = (int(ink) * Main.difficulty) / 3 + int(ink) + GameData.ink_mp
-	total_time = floor((ink * Main.difficulty + GameData.time_mp) / time_factor)
+	ink_amount = (int(ink) * GameData.difficulty) / 3 + int(ink) + GameData.ink_mp
+	total_time = (ink * GameData.difficulty + ink * 2 + GameData.time_mp) / time_factor
 	max_ink_amount = ink_amount
 	print(ink_amount)
+
+func _draw_empty_canvas() -> void:
+	for x in range(canvas_position.x, canvas_position.x + canvas_size.x):
+		for y in range(canvas_position.y, canvas_position.y + canvas_size.y):
+			stencil_layer.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():

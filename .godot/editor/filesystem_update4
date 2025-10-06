@@ -15,3 +15,7 @@ res://scripts/control/audio_control.gd
 res://scripts/root/phone.gd
 res://scenes/controls/scene_control.tscn
 res://scripts/control/scene_control.gd
+res://scenes/root/upgrade_screen.tscn
+res://scripts/root/upgrade_screen.gd
+res://scenes/root/collection_menu.tscn
+res://scripts/root/collection_menu.gd

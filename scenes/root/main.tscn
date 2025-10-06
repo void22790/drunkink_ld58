@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bmkni1ppjyc11"]
+[gd_scene load_steps=52 format=3 uid="uid://bmkni1ppjyc11"]
 
 [ext_resource type="Script" uid="uid://by3se8e4n1jkn" path="res://scripts/root/main.gd" id="1_jc805"]
 [ext_resource type="Texture2D" uid="uid://1xe1t3516tp7" path="res://graphics/func/frame.png" id="2_20h35"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c4j5y0h0xlcl1" path="res://graphics/func/ashtray.png" id="18_4vnrr"]
 [ext_resource type="FontFile" uid="uid://cr4w8q6feu5hn" path="res://graphics/fonts/HandymandiFree.ttf" id="18_hlxpt"]
 [ext_resource type="Script" uid="uid://cb8tlfilxl70s" path="res://scripts/root/phone.gd" id="19_ow48t"]
+[ext_resource type="Theme" uid="uid://fb8i75cnh00j" path="res://graphics/menu_button.tres" id="19_toygd"]
 [ext_resource type="Texture2D" uid="uid://cbdh02ch5eg86" path="res://graphics/func/smartphone_shadow.png" id="20_juub5"]
 [ext_resource type="Texture2D" uid="uid://cydk8mpbrgsqe" path="res://graphics/func/pb_normal.png" id="21_eiprl"]
 [ext_resource type="Texture2D" uid="uid://dus3fgeu6xp3a" path="res://graphics/func/smartphone.png" id="21_hkivt"]
@@ -93,6 +94,16 @@ shader_parameter/frequency = 5.00000019
 shader = ExtResource("4_d8tfi")
 shader_parameter/intensity = 0.50000002375
 shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqduw"]
+shader = ExtResource("4_d8tfi")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_il86x"]
+bg_color = Color(0.44313726, 0.24705882, 0.32156864, 1)
+border_width_top = 3
+border_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
 
 [sub_resource type="Animation" id="Animation_20h35"]
 resource_name = "smoking"
@@ -170,8 +181,6 @@ centered = false
 
 [node name="Drawing Canvas" type="Node2D" parent="."]
 script = ExtResource("2_cgoxl")
-cursor_reversed = false
-cursor_random = false
 
 [node name="Stencil Layer" type="TileMapLayer" parent="Drawing Canvas"]
 tile_set = ExtResource("3_qo04j")
@@ -450,7 +459,21 @@ position = Vector2(40, 38)
 rotation = -0.09890218
 texture = ExtResource("18_4vnrr")
 
+[node name="End Run Button" type="Button" parent="GUI Control"]
+visible = false
+material = SubResource("ShaderMaterial_eqduw")
+layout_mode = 0
+offset_left = 7.0
+offset_top = 154.0
+offset_right = 74.0
+offset_bottom = 173.0
+theme = ExtResource("19_toygd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_il86x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_il86x")
+text = "End Run"
+
 [node name="Timer Hand" type="Node2D" parent="."]
+visible = false
 position = Vector2(-144, 14)
 rotation = -0.62831855
 script = ExtResource("4_8vuw5")
@@ -530,6 +553,7 @@ text = "Start"
 
 [connection signal="toggled" from="GUI Control/Phone/SoundButton" to="GUI Control/Phone" method="_on_sound_button_toggled"]
 [connection signal="toggled" from="GUI Control/Phone/MusicButton" to="GUI Control/Phone" method="_on_music_button_toggled"]
+[connection signal="pressed" from="GUI Control/End Run Button" to="." method="_on_end_run_button_pressed"]
 [connection signal="timeout" from="Timer Hand/Total Timer" to="." method="_on_total_timer_timeout"]
 [connection signal="pressed" from="Debug Menu/MatchButton" to="." method="_on_match_button_pressed"]
 [connection signal="pressed" from="Debug Menu/StartButton" to="Timer Hand" method="_on_start_button_pressed"]
