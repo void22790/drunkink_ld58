@@ -73,3 +73,4 @@ func _on_end_button_pressed() -> void:
 	AudioControl.button.play()
 	AudioControl.stats.stop()
 	SceneControl.change_scene("menu")
+	GameData.save_game()

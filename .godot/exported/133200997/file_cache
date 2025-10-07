@@ -1,0 +1,13 @@
+res://graphics/func/tilesets/drawing_tileset.tres::147438ed5b1a83cf10e8c16730e63776::1759857081::res://.godot/exported/133200997/export-63c678ba2dd28e5fb03582a239c2399d-drawing_tileset.res
+res://graphics/menu_button.tres::bc2e196ad7598f8eecc1c60971e3d1e6::1759857081::res://.godot/exported/133200997/export-c3af5b73b1798dc063624654a1e52cb1-menu_button.res
+res://scenes/controls/audio_control.tscn::22c2ad3edc2f463bae9d8bab534bbe69::1759773508::res://.godot/exported/133200997/export-d07cf5c54fc76617050d241991deb878-audio_control.scn
+res://scenes/controls/game_data.tscn::92081a7b83dbdef86615d96b97ce62d3::1759873325::res://.godot/exported/133200997/export-bb8aee811621442e4cb0f4b14f848c8e-game_data.scn
+res://scenes/controls/mouse_cursor.tscn::cbd859f125ab94cf9820fd4e740f7baf::1759704965::res://.godot/exported/133200997/export-b403badd97688b13743ff2ee0ab9bcfc-mouse_cursor.scn
+res://scenes/controls/scene_control.tscn::fb67cdfd97cd45e0b7c56b01e8bfc4ff::1759787773::res://.godot/exported/133200997/export-b1e592509891dd640363020d9ebd87b1-scene_control.scn
+res://scenes/root/main.tscn::e5e30789202be954b1ae3878288f494b::1759873863::res://.godot/exported/133200997/export-c10c43bcbbd62fce00b47f6cb0f52649-main.scn
+res://scenes/root/menu.tscn::a0f82e6c5dfe9280de1b45e511445d4a::1759874282::res://.godot/exported/133200997/export-443af2a675d31f80881d78f7cdb54654-menu.scn
+res://scenes/root/collection_menu.tscn::d9799b085c09e728dff4ae4b04ed73fb::1759863636::res://.godot/exported/133200997/export-eef3f0f77d28a7c06ec54d80910d9470-collection_menu.scn
+res://scenes/root/stats.tscn::14f9cdaeb07f7f8c4b8c22a836093a1a::1759874000::res://.godot/exported/133200997/export-98604cc8829e82904655a21e76f66afa-stats.scn
+res://scenes/root/upgrade_screen.tscn::5fedb8a0805146d97d4f52e694be079e::1759857081::res://.godot/exported/133200997/export-9c4bb21d11230175e7f35f423a5602c7-upgrade_screen.scn
+res://default_bus_layout.tres::bea44a92f19688ca79be5af334b0782e::1759680928::res://.godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res
+res://scenes/controls/gallery.tscn::34cc0061d45dcae7a8dff71b43e7efea::1759872836::res://.godot/exported/133200997/export-34d8df8a1ebad505db4ec1636ad8bf00-gallery.scn

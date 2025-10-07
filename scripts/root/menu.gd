@@ -8,6 +8,10 @@ extends Node2D
 
 func _ready() -> void:
 	AudioControl.menu.play()
+	if GameData.sound_on == false:
+		sound_button.button_pressed = true
+	if GameData.music_on == false:
+		music_button.button_pressed = true
 
 func _process(_delta: float) -> void:
 	pass
@@ -86,6 +90,7 @@ func _on_music_button_toggled(toggled_on: bool) -> void:
 	AudioControl.button.play()
 
 func _on_quit_button_pressed() -> void:
+	GameData.save_game()
 	get_tree().quit()
 
 func _on_freestyle_button_pressed() -> void:
@@ -93,3 +98,14 @@ func _on_freestyle_button_pressed() -> void:
 	AudioControl.menu.stop()
 	GameData.type = Main.GameType.FREE
 	SceneControl.change_scene("main")
+
+func _on_score_button_pressed() -> void:
+	AudioControl.button.play()
+	GameData.tt_number = 0
+
+func _on_upgrades_button_pressed() -> void:
+	AudioControl.button.play()
+	GameData.cursor_amp = 20.0
+	GameData.cursor_weight = 0.05
+	GameData.time_mp = 0.0
+	GameData.ink_mp = 0.0

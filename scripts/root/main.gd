@@ -12,6 +12,7 @@ class_name Main
 @onready var number_text: Label = $"GUI Control/Level/Number Text"
 @onready var ink_bar: Control = $"GUI Control/Ink Bar"
 @onready var end_run_button: Button = $"GUI Control/End Run Button"
+@onready var clear_button: Button = $"GUI Control/Clear Button"
 
 var canvas_position: Vector2i
 var canvas_size: Vector2i
@@ -49,6 +50,7 @@ func _setup_type() -> void:
 		drawing_canvas.cursor_random = false
 		drawing_canvas.cursor_weight = 0.2
 		end_run_button.show()
+		clear_button.show()
 	if game_type == GameType.DRUNK:
 		ink_bar.show()
 		timer_hand.show()
@@ -56,6 +58,7 @@ func _setup_type() -> void:
 		drawing_canvas.cursor_random = true
 		drawing_canvas.cursor_weight = GameData.cursor_weight
 		end_run_button.hide()
+		clear_button.hide()
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("mode"):
@@ -77,6 +80,7 @@ func _input(_event: InputEvent) -> void:
 		AudioControl.game.stop()
 		AudioControl.machine.stop()
 		SceneControl.change_scene("menu")
+		GameData.save_game()
 
 func _update_score() -> void:
 	var ink = 0
@@ -120,3 +124,13 @@ func _out_of_ink() -> void:
 func _on_end_run_button_pressed() -> void:
 	AudioControl.button.play()
 	_update_score()
+	GameData.save_game()
+
+func _on_clear_button_pressed() -> void:
+	AudioControl.button.play()
+	drawing_canvas.clear_canvas()
+
+func _on_ashtray_quit_button_pressed() -> void:
+	AudioControl.button.play()
+	AudioControl.game.stop()
+	SceneControl.change_scene("menu")

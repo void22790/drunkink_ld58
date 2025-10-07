@@ -41,8 +41,8 @@ func _on_time_button_pressed() -> void:
 func _on_steady_button_pressed() -> void:
 	AudioControl.button.play()
 	var amp = GameData.cursor_amp
-	amp += 0.05
-	amp = clamp(amp, 0.05, 0.2)
+	amp -= 4.0
+	amp = clamp(amp, 0.0, 20.0)
 	GameData.cursor_amp = amp
 	AudioControl.stats.stop()
 	SceneControl.change_scene("main")
@@ -50,8 +50,8 @@ func _on_steady_button_pressed() -> void:
 func _on_speed_button_pressed() -> void:
 	AudioControl.button.play()
 	var weight = GameData.cursor_weight
-	weight -= 4.0
-	weight = clamp(weight, 0.0, 20.0)
+	weight += 0.05
+	weight = clamp(weight, 0.05, 0.2)
 	GameData.cursor_weight = weight
 	AudioControl.stats.stop()
 	SceneControl.change_scene("main")

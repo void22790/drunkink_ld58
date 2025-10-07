@@ -94,6 +94,11 @@ func _draw_empty_canvas() -> void:
 		for y in range(canvas_position.y, canvas_position.y + canvas_size.y):
 			stencil_layer.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 
+func clear_canvas() -> void:
+	for x in range(canvas_position.x, canvas_position.x + canvas_size.x):
+		for y in range(canvas_position.y, canvas_position.y + canvas_size.y):
+			drawing_layer.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+
 func _draw_stencil() -> void:
 	if stencil_data.is_empty():
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjl1rskjen3r0"]
+[gd_scene load_steps=15 format=3 uid="uid://bjl1rskjen3r0"]
 
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_mn3au"]
 [ext_resource type="Script" uid="uid://ckq33cgdphw0f" path="res://scripts/root/menu.gd" id="1_uvd6o"]
@@ -18,11 +18,6 @@ border_width_top = 3
 border_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xddw"]
-shader = ExtResource("1_mn3au")
-shader_parameter/intensity = 1.0000000475
-shader_parameter/frequency = 5.00000019
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_waujs"]
 shader = ExtResource("1_mn3au")
 shader_parameter/intensity = 1.0000000475
 shader_parameter/frequency = 5.00000019
@@ -67,7 +62,7 @@ offset_right = 318.0
 offset_bottom = 178.0
 theme_override_colors/font_color = Color(0.26666668, 0.2784314, 0.3764706, 1)
 theme_override_fonts/font = ExtResource("4_2wrav")
-text = "voidsrc irensa v1.0"
+text = "voidsrc irensa v1.1"
 
 [node name="MainMenu" type="Control" parent="."]
 layout_mode = 3
@@ -96,13 +91,6 @@ layout_mode = 2
 theme = ExtResource("2_uvd6o")
 text = "Freestyle
 "
-
-[node name="Collection Button" type="Button" parent="MainMenu/VBoxContainer"]
-material = SubResource("ShaderMaterial_waujs")
-layout_mode = 2
-theme = ExtResource("2_uvd6o")
-disabled = true
-text = "Collection"
 
 [node name="Options Button" type="Button" parent="MainMenu/VBoxContainer"]
 material = SubResource("ShaderMaterial_t0a4s")
@@ -180,9 +168,9 @@ offset_bottom = 180.0
 use_parent_material = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 0
-offset_left = 250.0
+offset_left = 257.0
 offset_top = 140.0
-offset_right = 298.0
+offset_right = 305.0
 offset_bottom = 159.0
 theme = ExtResource("2_uvd6o")
 text = "Back"
@@ -190,10 +178,10 @@ text = "Back"
 [node name="VBoxContainer" type="VBoxContainer" parent="Options"]
 use_parent_material = true
 layout_mode = 0
-offset_left = 215.0
+offset_left = 205.0
 offset_top = 21.0
-offset_right = 300.0
-offset_bottom = 63.0
+offset_right = 305.0
+offset_bottom = 125.0
 
 [node name="Sound Button" type="Button" parent="Options/VBoxContainer"]
 use_parent_material = true
@@ -209,6 +197,20 @@ theme = ExtResource("2_uvd6o")
 toggle_mode = true
 text = "Music On"
 
+[node name="Score Button" type="Button" parent="Options/VBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Reset Score"
+
+[node name="Upgrades Button" type="Button" parent="Options/VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme = ExtResource("2_uvd6o")
+text = "Reset
+Upgrades"
+
 [node name="Mouse Cursor" parent="." instance=ExtResource("6_pdwgi")]
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/Drunk Mode Button" to="." method="_on_drunk_mode_button_pressed"]
@@ -222,3 +224,5 @@ text = "Music On"
 [connection signal="pressed" from="Options/Back Options Button" to="." method="_on_back_options_button_pressed"]
 [connection signal="toggled" from="Options/VBoxContainer/Sound Button" to="." method="_on_sound_button_toggled"]
 [connection signal="toggled" from="Options/VBoxContainer/Music Button" to="." method="_on_music_button_toggled"]
+[connection signal="pressed" from="Options/VBoxContainer/Score Button" to="." method="_on_score_button_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Upgrades Button" to="." method="_on_upgrades_button_pressed"]

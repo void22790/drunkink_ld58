@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://n187nb6mf87u"]
+
+[ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_u8s2m"]
+[ext_resource type="FontFile" uid="uid://cr4w8q6feu5hn" path="res://graphics/fonts/HandymandiFree.ttf" id="2_wl864"]
+[ext_resource type="Texture2D" uid="uid://brinxs3hc00bx" path="res://graphics/func/empty_slot.png" id="3_no12c"]
+[ext_resource type="Texture2D" uid="uid://jnj6mnf3jqj0" path="res://graphics/func/download_normal.png" id="4_im5lw"]
+[ext_resource type="Texture2D" uid="uid://chegk6pnegsgs" path="res://graphics/func/download_pressed.png" id="5_22he6"]
+[ext_resource type="Texture2D" uid="uid://jen3a62teesw" path="res://graphics/func/delete_normal.png" id="6_5dctd"]
+[ext_resource type="Texture2D" uid="uid://c3n3qerhytwv2" path="res://graphics/func/delete_pressed.png" id="7_y31yf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqvdn"]
+shader = ExtResource("1_u8s2m")
+shader_parameter/intensity = 1.0000000475
+shader_parameter/frequency = 5.00000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no12c"]
+shader = ExtResource("1_u8s2m")
+shader_parameter/intensity = 0.50000002375
+shader_parameter/frequency = 7.000000285
+
+[node name="Gallery" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Label" type="Label" parent="Control"]
+material = SubResource("ShaderMaterial_yqvdn")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 8.0
+offset_right = 70.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
+theme_override_fonts/font = ExtResource("2_wl864")
+text = "Tattoos Collection"
+
+[node name="Slots" type="GridContainer" parent="."]
+material = SubResource("ShaderMaterial_no12c")
+columns = 3
+
+[node name="Slot1" type="Control" parent="Slots"]
+use_parent_material = true
+layout_mode = 2
+
+[node name="Background" type="Sprite2D" parent="Slots/Slot1"]
+use_parent_material = true
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_no12c")
+
+[node name="Sprite" type="Sprite2D" parent="Slots/Slot1"]
+use_parent_material = true
+scale = Vector2(0.4, 0.4)
+
+[node name="Download Button" type="TextureButton" parent="Slots/Slot1"]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 32.0
+offset_right = -2.0
+offset_bottom = 49.0
+texture_normal = ExtResource("4_im5lw")
+texture_pressed = ExtResource("5_22he6")
+texture_hover = ExtResource("4_im5lw")
+texture_disabled = ExtResource("5_22he6")
+
+[node name="Delete Button" type="TextureButton" parent="Slots/Slot1"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 32.0
+offset_right = 20.0
+offset_bottom = 49.0
+texture_normal = ExtResource("6_5dctd")
+texture_pressed = ExtResource("7_y31yf")
+texture_hover = ExtResource("6_5dctd")
+texture_disabled = ExtResource("7_y31yf")

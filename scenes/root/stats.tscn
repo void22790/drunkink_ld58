@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwlx0stb30qvc"]
+[gd_scene load_steps=18 format=3 uid="uid://dwlx0stb30qvc"]
 
 [ext_resource type="Script" uid="uid://bwvrj6otbt43a" path="res://scripts/root/stats.gd" id="1_rf7xl"]
 [ext_resource type="Shader" uid="uid://nyhumgmh88xf" path="res://shaders/jitter.gdshader" id="1_wd12g"]
@@ -24,6 +24,11 @@ shader_parameter/frequency = 3.10000009975
 shader = ExtResource("1_wd12g")
 shader_parameter/intensity = 2.0
 shader_parameter/frequency = 3.2000001045
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85qai"]
+bg_color = Color(0.44313726, 0.24705882, 0.32156864, 1)
+border_width_top = 3
+border_color = Color(0.73333335, 0.2784314, 0.30980393, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdqa8"]
 shader = ExtResource("1_wd12g")
@@ -105,6 +110,8 @@ material = SubResource("ShaderMaterial_i2f8p")
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
 theme = ExtResource("4_e7h3b")
+theme_override_styles/normal = SubResource("StyleBoxFlat_85qai")
+theme_override_styles/hover = SubResource("StyleBoxFlat_85qai")
 text = "Collect"
 
 [node name="Next Button" type="Button" parent="Control/HBoxButtonContainer"]

@@ -90,12 +90,12 @@ text = "End Run"
 
 [node name="Save Button" type="Button" parent="Control/HBoxContainer"]
 use_parent_material = true
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("3_43fw8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5ukao")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5ukao")
-text = "Save"
+text = "Download"
 
 [node name="Next Button" type="Button" parent="Control/HBoxContainer"]
 use_parent_material = true
@@ -105,6 +105,7 @@ theme = ExtResource("3_43fw8")
 text = "Next"
 
 [node name="LineEdit" type="LineEdit" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_mbssr")
 offset_left = 12.0
 offset_top = 42.0
@@ -124,9 +125,9 @@ placeholder_text = "Enter a save path.."
 
 [node name="ImageName" type="LineEdit" parent="."]
 material = SubResource("ShaderMaterial_mbssr")
-offset_left = 12.0
+offset_left = 100.0
 offset_top = 65.0
-offset_right = 307.0
+offset_right = 220.0
 offset_bottom = 82.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -138,7 +139,7 @@ theme_override_fonts/font = ExtResource("3_vkdli")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wdwai")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_5ukao")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_taojx")
-placeholder_text = "Enter image name"
+text = "tattoo.png"
 
 [node name="Mouse Cursor" parent="." instance=ExtResource("5_mbssr")]
 

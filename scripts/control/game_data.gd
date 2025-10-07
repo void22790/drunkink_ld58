@@ -43,5 +43,46 @@ var tattoos: PackedStringArray = [
 	"res://graphics/tattoo/tt_rose.png"
 ]
 
+var save_path: String = "user://drunkink_save.json"
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	load_game()
+
+func save_game():
+	var save_data = {
+	"tattoos": tt_number,
+	"music": music_on,
+	"sound": sound_on,
+	"amp": cursor_amp,
+	"weight": cursor_weight,
+	"time": time_mp,
+	"ink": ink_mp
+	}
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(save_data))
+		file.close()
+		print("Game saved: ", save_data)
+	else:
+		push_error("Unable to open a save file.")
+
+func load_game():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
+			var text = file.get_as_text()
+			var data = JSON.parse_string(text)
+			file.close()
+			if typeof(data) == TYPE_DICTIONARY:
+				tt_number = data.get("tattoos", 0)
+				music_on = data.get("music", true)
+				sound_on = data.get("sound", true)
+				cursor_amp = data.get("amp", 20.0)
+				cursor_weight = data.get("weight", 0.05)
+				time_mp = data.get("time", 0.0)
+				ink_mp = data.get("ink", 0.0)
+			else:
+				push_error("Unable to read save data. Wrong save format.")
+		else:
+			push_error("Unable to read save data. Can't open save file.")
